@@ -117,7 +117,7 @@ class CouponController extends Controller
         $excel->setActiveSheetIndex(0);
 
         // Redirect output to a clients web browser (Excel5)
-        PHPExcel_IOFactory::createWriter($excel, 'Excel5');
+        \PHPExcel_IOFactory::createWriter($excel, 'Excel5');
         
         // We'll be outputting an excel file
         header('Content-type: application/vnd.ms-excel');

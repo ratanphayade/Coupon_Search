@@ -32,7 +32,17 @@ use yii\widgets\LinkPager;
 			</div>
                     </div>
                     <div class="row modal-footer">
-                        <div class="col-md-4 col-md-offset-7" align="right;" style="margin-bottom:10px">
+                        <div class='col-md-1'>
+                            <?php 
+                                $total = ($coupon->CountSuccess+$coupon->CountFail); 
+                                $val = ($total)? ($coupon->CountSuccess/$total)*100 : 0;
+                            ?>
+                            <input type="button" class="btn btn-info active" value='<?= round($val,1) ?>% Success'/>
+                        </div>
+                        <div class='col-md-4 col-md-offset-1' style='margin-top: 5px'>
+                            <b> Added On : <?= $coupon->DateAdded ?></b>
+                        </div>
+                        <div class="col-md-3 col-md-offset-3" align="right" style="margin-bottom:10px">                           
                             <button type="button" class="btn btn-block btn-primary" onClick="window.open('<?= $coupon->website->WebsiteURL?>')" formtarget="_blank">
                                 <?= (!$coupon->IsDeal)? empty($coupon->CouponCode)? "Empty" : $coupon->CouponCode : "GRAB DEAL"; ?>
                             </button>

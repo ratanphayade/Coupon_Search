@@ -129,7 +129,7 @@ class CouponController extends Controller
     
     public function actionTest(){
 
-        require_once __DIR__.'/phpexcel/XPHPExcel.php';
+        include_once __DIR__.'/PHPExcel/XPHPExcel.php';
         $objPHPExcel= XPHPExcel::createPHPExcel();
         $objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
                              ->setLastModifiedBy("Maarten Balliauw")

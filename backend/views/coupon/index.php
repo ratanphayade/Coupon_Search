@@ -56,7 +56,7 @@ $this->title = "Coupon Search";
                                         <select name='Stores' id='Stores' multiple='multiple' size='15' class='selectpicker' style='width: 250px;'>
                                             <option value='all' selected> Select All </option>                                                           
                                             <?php foreach ($stores as $website) { ?>
-                                            <option value='<?= $website->WebsiteID; ?>'><?= $website->WebsiteName; ?></option>
+                                            <option value='<?= $website->WebsiteID ?>'><?= $website->WebsiteName ?></option>
                                             <?php } ?> 
                                         </select>  
                                     </label>
@@ -75,7 +75,7 @@ $this->title = "Coupon Search";
                                         <select name='Category' id='Category' multiple='multiple' size='15' class='input-medium' style='width: 250px;'>
                                             <option value='all' selected> Select All </option>                                                           
                                             <?php foreach ($category as $cat) { ?>
-                                            <option value='<?= $cat->CategoryID; ?>'><?= $cat->Name; ?></option>
+                                            <option value='<?= $cat->CategoryID ?>'><?= $cat->Name ?></option>
                                             <?php } ?> 
                                         </select> 
                                     </label>

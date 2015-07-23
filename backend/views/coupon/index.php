@@ -17,8 +17,7 @@ $this->title = "Coupon Search";
         -webkit-appearance: none;
     }
 </style>
-    
-<script src="js/script.js"></script>
+
 <div class="container-fluid" style="margin-top:-10px;">
     <div class="row">
         <div class="col-md-4" >

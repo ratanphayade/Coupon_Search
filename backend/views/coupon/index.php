@@ -8,78 +8,80 @@ $this->title = "Coupon Search";
 ?>
 <style>
     .top-buffer { margin-top:20px; }
+    option {
+        height: 25px;
+        font-size: 16px;
+    }
 </style>
     
 <script src="js/script.js"></script>
 <div class="container-fluid" style="margin-top:-10px;">
     <div class="row">
         <div class="col-md-4" >
-            <div class="panel-group" id="panel-158751" style="position:fixed; width:350px">
+            <div class="panel-group" id="" style="position:fixed; width:300px">
                 <h1><?= "Coupon Search" ?></h1>
                 <form role="form" onchange="refreshWithUpdatedDetails();">
-		<div class="panel panel-default">
-                    <div class="panel-heading" id="panel1">
-			<a class="panel-title collapsed" x data-toggle="collapse" data-parent="#panel-158751" href="#panel-element-401808">Deal Type</a>
-                    </div>
-                    <div id="panel-element-401808" class="panel-collapse collapse">
-			<div class="panel-body">
-				<div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" id="deal" name="couponType" value="1" onchange="refreshWithUpdatedDetails();"> Deal
+                <div id="accordion" class="panel-group">
+                    <div class="panel panel-default modal-content">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" class='modal-head' data-parent="#accordion" href="#collapseOne">Coupon Type</a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse">
+                            <div class="panel-body modal-body">
+                                <label>
+                                        <select name='couponType' id='couponType' multiple size='3' class='selectpicker' style='width: 250px;'>
+                                            <option value='all' selected>Select All</option>
+                                            <option value='1'>Deal</option>
+                                            <option value='0'>Coupon</option>
+                                        </select>                                        
                                     </label>
-                                    <br/>
-                                    <label>
-                                        <input type="checkbox" id="coupon" name="couponType" value="0" onchange="refreshWithUpdatedDetails();"> Coupon
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default modal-content">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" class='modal-head' data-parent="#accordion" href="#collapseTwo">Store</a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse">
+                            <div class="panel-body modal-body">
+                                <label>
+                                        <select name='Stores' id='Stores' multiple='multiple' size='15' class='selectpicker' style='width: 250px;'>
+                                            <option value='all' selected> Select All </option>                                                           
+                                            <?php foreach ($stores as $website) { ?>
+                                            <option value='<?= $website->WebsiteID; ?>'><?= $website->WebsiteName; ?></option>
+                                            <?php } ?> 
+                                        </select>  
                                     </label>
-				</div> 
-			</div>
+                            </div>
+                        </div>
                     </div>
-		</div>
-		<div class="panel panel-default">
-                    <div class="panel-heading">
-			<a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-158751" href="#panel-element-896831">Store</a>
-                    </div>
-                    <div id="panel-element-896831" class="panel-collapse collapse">
-			<div class="panel-body">
-				<div class="checkbox" style="overflow-y: scroll; height:300px;">
+                    <div class="panel panel-default modal-content">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" class='modal-head' data-parent="#accordion" href="#collapseThree">Category</a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse">
+                            <div class="panel-body modal-body">
                                     <label>
-                                        <input type="radio"  name="Stores" id="allbrands" checked="true" onchange="refreshWithUpdatedDetails();" value="all"/> Select All
+                                        <select name='Category' id='Category' multiple='multiple' size='15' class='input-medium' style='width: 250px;'>
+                                            <option value='all' selected> Select All </option>                                                           
+                                            <?php foreach ($category as $cat) { ?>
+                                            <option value='<?= $cat->CategoryID; ?>'><?= $cat->Name; ?></option>
+                                            <?php } ?> 
+                                        </select> 
                                     </label>
-                                    <br/>
-                                    <?php foreach ($stores as $website) { ?>
-                                        <label>
-                                            <input type="radio" id="allbrands" value="<?= $website->WebsiteID; ?>" name ="Stores" onchange="refreshWithUpdatedDetails();">
-                                            <?php echo $website->WebsiteTitle; ?>
-                                        </label>
-                                        <br/>
-                                    <?php } ?> 
-				</div> 
-			</div>
-                    </div>
-		</div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-			<a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-158751" href="#panel-element-896833">Categories</a>
-                    </div>
-                    <div id="panel-element-896833" class="panel-collapse collapse">
-			<div class="panel-body">
-				<div class="checkbox" style="overflow-y: scroll; height:300px;">
-                                    <label>
-                                        <input type="radio" name="Category" id="category" checked="true" value="all" onchange="refreshWithUpdatedDetails();"/> Select All
-                                    </label>      
-                                    <br>
-                                    <?php foreach ($category as $brand) { ?>
-                                        <label>
-                                            <input type="radio" id="category" value="<?= $brand->CategoryID; ?>" name ="Category" onchange="refreshWithUpdatedDetails();">
-                                            <?php echo $brand->Name; ?>
-                                        </label>
-                                        <br/>
-                                    <?php } ?> 
-				</div>
-			</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <input type="button" class="btn btn-success" onclick="downloadDataAsExcel();" value="Download Excel"/>
+                    <div class='panel-body col-md-offset-3'>
+                        <input type="button" class="btn btn-success" onclick="downloadDataAsExcel();" value="Download Excel"/>
+                    </div>                
             </form>
             </div>
 	</div>

@@ -6,6 +6,17 @@ use yii\widgets\LinkPager;
         <div id="ajax-data">   
             <div class="col-md-8">
 		<div class="row">
+        <?php if($status == '0'){ ?>
+          <div class="col-md-12 modal-content top-buffer">
+              <div class="row modal-header">
+                  <h3 class='modal-title'>Oops.... </h3>
+              </div>
+              <div class="row modal-body">
+                  No Result For This Search....:(
+              </div>
+          </div>
+        <?php die(); } ?>
+            
                     <?php foreach ($coupons as $coupon){ ?>
                         <div class="col-md-12 modal-content top-buffer">
                             <div class="row modal-header"> 

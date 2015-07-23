@@ -177,6 +177,7 @@ class Coupon extends \yii\db\ActiveRecord
     */
     public function getCouponCategories()
     {
-        return $this->hasMany(CouponCategories::className(), ['CategoryID' => 'Category']);
+        return $this->hasMany(CouponCategories::className(), ['CategoryID' => 'CategoryID'])
+                ->viaTable('CouponCategoryInfo', ['CouponID' => 'CouponID']);
     }
 }

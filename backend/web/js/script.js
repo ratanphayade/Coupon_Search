@@ -19,12 +19,6 @@ function refreshWithUpdatedDetails(){
     obj.send();
 }        
 
-function requestDataFilter(coupontype,store,category){
-    var obj = getAjaxRequestObject();  
-    obj.open("GET","index.php?r=coupon/search&coupontype="+coupontype+"&store="+store+"&category="+category,true);
-    obj.send();
-}
-
 function downloadDataAsExcel() {
    window.open("index.php?r=coupon/download&coupontype="+$("#couponType").val()+"&store="+$('#Stores').val()+"&category="+$('#Category').val(), '_blank');        
 }

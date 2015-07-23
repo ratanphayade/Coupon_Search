@@ -138,9 +138,10 @@ $this->title = "Coupon Search";
 		</div>
                 <?php } ?>
             </div>
+            <?= LinkPager::widget(['pagination' => $pagination]) ?>
         </div>
     </div>
-                <?= LinkPager::widget(['pagination' => $pagination]) ?>
+                
                 <?php yii\widgets\Pjax::end() ?>     
     </div>
 </div>

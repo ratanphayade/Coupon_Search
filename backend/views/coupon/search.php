@@ -61,4 +61,8 @@ use yii\widgets\LinkPager;
                     </div>
 		</div>
                 <?php } ?>
+                </div>
+                <?= LinkPager::widget(['pagination' => $pagination]) ?>
+                </div>
+        </div>
                 <?php yii\widgets\Pjax::end() ?>                  

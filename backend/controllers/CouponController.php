@@ -59,13 +59,22 @@ class CouponController extends Controller
         $store = (isset($_GET['store']))? $_GET['store'] : "all";
         
         $category = (isset($_GET['category']))? $_GET['category'] : "all";
+                 
+        $query = Coupon::find();
         
-        $data = $this->extractData($coupontype, $store, $category);
-                
+        $pagination = new Pagination([
+            'defaultPageSize' => 10,
+            'totalCount' => $query->count(),
+        ]);
+        
+        $data = $this->extractData($query, $coupontype, $store, $category , $pagination->limit, $pagination->offset);
+
         // Partially rendering the search result to existing page
         return $this->renderPartial('search', [
                     'coupons' => $data,       
                     'status' => empty($data)? 0 : 1,
+                    'pagination' => $pagination,
+            
         ]); 
     }
     
@@ -90,16 +99,16 @@ class CouponController extends Controller
     
     public function actionDownload($coupontype, $store, $category) {
         
-        $excel = new PHPExcel();
-        
         $coupontype = $_GET['coupontype'];
 
         $store = (isset($_GET['store']))? $_GET['store'] : "all";
         
         $category = (isset($_GET['category']))? $_GET['category'] : "all";
         
-        $coupons=$this->extractData($category, $store, $category);
-        $i = 1;
+        $coupons=$this->extractData(Coupon::find(), $category, $store, $category);
+        
+        $excel = new PHPExcel();
+        $i = 2;
         foreach ($coupons as $coupon) {
             $excel->getActiveSheet()
                   ->setCellValue('B'.$i, $coupon->Title)
@@ -136,7 +145,7 @@ class CouponController extends Controller
      *
      */
     
-    private function extractData($coupontype, $store, $category){
+    private function extractData($query, $coupontype, $store, $category, $limit = 60, $offset = 0){
 
         $condition = "";
         
@@ -153,12 +162,13 @@ class CouponController extends Controller
         
         $condition .= "1=1";
         
-        return Coupon::find()
+        return $query
                     ->where($condition)        
                     ->orderBy('CouponID')
                     ->with('website')
                     ->joinWith('couponCategories')
-                    ->limit(100)
+                    ->limit($limit)
+                    ->offset($offset)
                     ->all();
     }
 }

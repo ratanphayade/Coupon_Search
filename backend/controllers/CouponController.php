@@ -21,11 +21,6 @@ class CouponController extends Controller
         
         $query = Coupon::find();
         
-        // Listing all available Stores
-        $stores = $this->getAllWebsites();
-        //Listing all available Categories
-        $category = $this->getAllCategories();
-        
         //Setting page size
         $pagination = new Pagination([
             'defaultPageSize' => 10,
@@ -44,8 +39,8 @@ class CouponController extends Controller
         //Rendering to the Webpage
         return $this->render('index', [
             'coupons' => $coupons,
-            'stores' => $stores,
-            'category' => $category,
+            'stores' => $this->getAllWebsites(),
+            'category' => $this->getAllCategories(),
             'pagination' => $pagination,
         ]);
     }
@@ -66,12 +61,11 @@ class CouponController extends Controller
         $category = (isset($_GET['category']))? $_GET['category'] : "all";
         
         $data = $this->extractData($coupontype, $store, $category);
-        
-        $status = empty($data)? 0 : 1;
+                
         // Partially rendering the search result to existing page
         return $this->renderPartial('search', [
                     'coupons' => $data,       
-                    'status' => $status,
+                    'status' => empty($data)? 0 : 1,
         ]); 
     }
     
@@ -108,10 +102,10 @@ class CouponController extends Controller
         $i = 1;
         foreach ($coupons as $coupon) {
             $excel->getActiveSheet()
-                    ->setCellValue('B'.$i, $coupon->Title)
-                    ->setCellValue('C'.$i, $coupon->website->WebsiteName)
-                    ->setCellValue('D'.$i, $coupon->CouponCode)
-                    ->setCellValue('E'.$i, $coupon->Description);
+                  ->setCellValue('B'.$i, $coupon->Title)
+                  ->setCellValue('C'.$i, $coupon->website->WebsiteName)
+                  ->setCellValue('D'.$i, $coupon->CouponCode)
+                  ->setCellValue('E'.$i, $coupon->Description);
             $i++;
         }
         
@@ -131,9 +125,6 @@ class CouponController extends Controller
 
         // Write file to the browser
         $objWriter->save('php://output');
-
-        
-
     }
     
     /**

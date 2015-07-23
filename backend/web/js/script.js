@@ -15,7 +15,7 @@ function getAjaxRequestObject(){
 
 function refreshWithUpdatedDetails(){
     var obj = getAjaxRequestObject();
-    obj.open("GET","index.php?r=coupon/search&coupontype="+$("#couponType").val()+"&store="+$('#Stores').val()+"&category="+$('#Category').val(),true)
+    obj.open("GET","index.php?r=coupon/search&coupontype="+$("#couponType").val()+"&store="+$('#Stores').val()+"&category="+$('#Category').val(),true);
     obj.send();
 }        
 

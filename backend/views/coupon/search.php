@@ -1,6 +1,5 @@
 <?php
 use yii\widgets\LinkPager;
-
 ?>
         <?php yii\widgets\Pjax::begin() ?>
         <div id="ajax-data">   
@@ -15,8 +14,7 @@ use yii\widgets\LinkPager;
                   No Result For This Search....:(
               </div>
           </div>
-        <?php die(); } ?>
-            
+        <?php die(); } ?>            
                     <?php foreach ($coupons as $coupon){ ?>
                         <div class="col-md-12 modal-content top-buffer">
                             <div class="row modal-header"> 
@@ -48,7 +46,7 @@ use yii\widgets\LinkPager;
                                 $total = ($coupon->CountSuccess+$coupon->CountFail); 
                                 $val = ($total)? ($coupon->CountSuccess/$total)*100 : 0;
                             ?>
-                            <input type="button" class="btn btn-info active" value='<?= round($val,1) ?>% Success'/>
+                            <input type="button" class="test btn btn-info active" value='<?= round($val,1) ?>% Success'/>
                         </div>
                         <div class='col-md-4 col-md-offset-1' style='margin-top: 5px'>
                             <b> Added On : <?= $coupon->DateAdded ?></b>
@@ -63,6 +61,7 @@ use yii\widgets\LinkPager;
                 <?php } ?>
                 </div>
                 <?= LinkPager::widget(['pagination' => $pagination]) ?>
+
                 </div>
         </div>
                 <?php yii\widgets\Pjax::end() ?>                  

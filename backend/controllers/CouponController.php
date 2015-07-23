@@ -154,7 +154,7 @@ class CouponController extends Controller
             $condition .= "IsDeal=$coupontype && ";
         
         if($store != 'all')
-            $condition .= "WebsiteID=$store && ";
+            $condition .= "website.WebsiteID=$store && ";
         
         if($category != 'all')
             $condition .= "CouponCategories.CategoryID=$category && ";

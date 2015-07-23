@@ -1,5 +1,6 @@
 
-function getAjaxRequestObject(){
+ 
+ function getAjaxRequestObject(){
     var xmlhttp;
     if (window.XMLHttpRequest) 
         xmlhttp=new XMLHttpRequest();
@@ -22,3 +23,9 @@ function refreshWithUpdatedDetails(){
 function downloadDataAsExcel() {
    window.open("index.php?r=coupon/download&coupontype="+$("#couponType").val()+"&store="+$('#Stores').val()+"&category="+$('#Category').val(), '_blank');        
 }
+    
+
+
+
+
+

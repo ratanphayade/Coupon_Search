@@ -16,7 +16,6 @@ $this->title = "Coupon Search";
         height: 28px;
         -webkit-appearance: none;
     }
-}
 </style>
     
 <script src="js/script.js"></script>

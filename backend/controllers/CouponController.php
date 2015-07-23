@@ -150,7 +150,6 @@ class CouponController extends Controller
         $condition = "";
         
         //Seting the search critaria
-        
         if($coupontype != 'all')
             $condition .= "IsDeal=$coupontype && ";
         
@@ -165,7 +164,7 @@ class CouponController extends Controller
         return $query
                     ->where($condition)        
                     ->orderBy('CouponID')
-                    ->with('website')
+                    ->joinWith('website')
                     ->joinWith('couponCategories')
                     ->limit($limit)
                     ->offset($offset)

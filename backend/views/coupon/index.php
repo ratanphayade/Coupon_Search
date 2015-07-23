@@ -137,7 +137,9 @@ $this->title = "Coupon Search";
 		</div>
                 <?php } ?>
             </div>
+            <div align="center">
             <?= LinkPager::widget(['pagination' => $pagination]) ?>
+            </div>
         </div>
     </div>
                 

@@ -12,6 +12,11 @@ $this->title = "Coupon Search";
         height: 25px;
         font-size: 16px;
     }
+    option:active{
+        height: 28px;
+        -webkit-appearance: none;
+    }
+}
 </style>
     
 <script src="js/script.js"></script>

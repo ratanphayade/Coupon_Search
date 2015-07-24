@@ -23,7 +23,7 @@ $this->title = "Coupon Search";
         <div class="col-md-4" >
             <div class="panel-group" id="" style="position:fixed; width:300px">
                 <h1><?= "Coupon Search" ?></h1>
-                <form role="form" onchange="refreshWithUpdatedDetails();">
+                <form role="form" id="searchForm" >
                 <div id="accordion" class="panel-group">
                     <div class="panel panel-default modal-content">
                         <div class="panel-heading">
@@ -83,11 +83,12 @@ $this->title = "Coupon Search";
                     </div>
                 </div>
                     <div class='panel-body col-md-offset-3'>
-                        <input type="button" class="btn btn-success" onclick="downloadDataAsExcel();" value="Download Excel"/>
+                        <input type="button" class="btn btn-success" id="downloadExcel" value="Download Excel"/>
                     </div>                
             </form>
             </div>
 	</div>
+        <div id="change">
         <?php yii\widgets\Pjax::begin() ?>
         <div id="ajax-data">   
             <div class="col-md-8">
@@ -141,9 +142,9 @@ $this->title = "Coupon Search";
             <?= LinkPager::widget(['pagination' => $pagination]) ?>
             </div>
         </div>
+    </div>                
+    <?php yii\widgets\Pjax::end() ?>     
     </div>
-                
-                <?php yii\widgets\Pjax::end() ?>     
     </div>
 </div>
     

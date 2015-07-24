@@ -47,7 +47,7 @@ use yii\widgets\LinkPager;
                                 $total = ($coupon->CountSuccess+$coupon->CountFail); 
                                 $val = ($total)? ($coupon->CountSuccess/$total)*100 : 0;
                             ?>
-                            <input type="button" class="btn btn-info active" value='<?= round($val,1) ?>% Success'/>
+                            <input type="button" class="test btn btn-info active" value='<?= round($val,1) ?>% Success'/>
                         </div>
                         <div class='col-md-4 col-md-offset-1' style='margin-top: 5px'>
                             <b> Added On : <?= $coupon->DateAdded ?></b>
@@ -66,4 +66,4 @@ use yii\widgets\LinkPager;
                 </div>
                 </div>
         </div>
-                <?php yii\widgets\Pjax::end() ?>                  
+                <?php yii\widgets\Pjax::end() ?>     

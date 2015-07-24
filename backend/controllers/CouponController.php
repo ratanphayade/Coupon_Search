@@ -13,22 +13,20 @@ use PHPExcel;
 /**
  * CouponController
  */
-class CouponController extends Controller
-{
+class CouponController extends Controller{
     
-    public function actionIndex()
-    {
+    public function actionIndex(){
         
-        $query = Coupon::find();
+        $coupons = Coupon::find();
         
-        //Setting page size
+        //ng page size
         $pagination = new Pagination([
             'defaultPageSize' => 10,
-            'totalCount' => $query->count(),
+            'totalCount' => $coupons->count(),
         ]);
         
         //Querying for Data
-        $coupons = $query
+        $filteredCoupons = $coupons
                     ->orderBy('CouponID')
                     ->joinWith('website')
                     ->joinWith('couponCategories')
@@ -38,7 +36,7 @@ class CouponController extends Controller
         
         //Rendering to the Webpage
         return $this->render('index', [
-            'coupons' => $coupons,
+            'coupons' => $filteredCoupons,
             'stores' => $this->getAllWebsites(),
             'category' => $this->getAllCategories(),
             'pagination' => $pagination,
@@ -53,26 +51,28 @@ class CouponController extends Controller
  * @return     : Filtered coupon list to search view
  * if not set all the parameter will have the value as string 'all'
  */
-    public function actionSearch($coupontype, $store, $category){
-        $coupontype = $_GET['coupontype'];
+    public function actionSearch($couponType, $Stores, $Category){
+        $coupontype = $_GET['couponType'];
 
-        $store = (isset($_GET['store']))? $_GET['store'] : "all";
+        $store = (isset($_GET['Stores']))? $_GET['Stores'] : "all";
         
-        $category = (isset($_GET['category']))? $_GET['category'] : "all";
+        $category = (isset($_GET['Category']))? $_GET['Category'] : "all";
                  
-        $query = Coupon::find();
+        $coupons = Coupon::find();
         
         $pagination = new Pagination([
             'defaultPageSize' => 10,
-            'totalCount' => $query->count(),
+            'totalCount' => $coupons->count(),
         ]);
         
-        $data = $this->extractData($query, $coupontype, $store, $category , $pagination->limit, $pagination->offset);
+        $filteredCoupons = $this->extractData($coupons, $coupontype, $store, 
+                                              $category , $pagination->limit, 
+                                              $pagination->offset);
 
         // Partially rendering the search result to existing page
         return $this->renderPartial('search', [
-                    'coupons' => $data,       
-                    'status' => empty($data)? 0 : 1,
+                    'coupons' => $filteredCoupons,       
+                    'status' => empty($filteredCoupons)? 0 : 1,
                     'pagination' => $pagination,
             
         ]); 
@@ -97,17 +97,22 @@ class CouponController extends Controller
 * @return filtered coupons to search view
 */
     
-    public function actionDownload($coupontype, $store, $category) {
+    public function actionDownload($couponType, $Stores, $Category) {
         
-        $coupontype = $_GET['coupontype'];
+        $coupontype = $_GET['couponType'];
 
-        $store = (isset($_GET['store']))? $_GET['store'] : "all";
+        $store = (isset($_GET['Stores']))? $_GET['Stores'] : "all";
         
-        $category = (isset($_GET['category']))? $_GET['category'] : "all";
+        $category = (isset($_GET['Category']))? $_GET['Category'] : "all";
         
         $coupons=$this->extractData(Coupon::find(), $category, $store, $category);
         
         $excel = new PHPExcel();
+        $excel->getActiveSheet()
+                  ->setCellValue('B1', "Title")
+                  ->setCellValue('C1', "Website Name")
+                  ->setCellValue('D1', "Coupon Code")
+                  ->setCellValue('E1', "Description");
         $i = 2;
         foreach ($coupons as $coupon) {
             $excel->getActiveSheet()
@@ -145,21 +150,21 @@ class CouponController extends Controller
      *
      */
     
-    private function extractData($query, $coupontype, $store, $category, $limit = 60, $offset = 0){
+    private function extractData($query, $coupontype, $store, $category, $limit=60, $offset=0){
 
         $condition = "";
         
         //Seting the search critaria
-        if($coupontype != 'all')
+        if($coupontype != 'all'){
             $condition .= "IsDeal=$coupontype && ";
-        
-        if($store != 'all')
+        }
+        if($store != 'all'){
             $condition .= "website.WebsiteID=$store && ";
-        
-        if($category != 'all')
+        }
+        if($category != 'all'){
             $condition .= "CouponCategories.CategoryID=$category && ";
-        
-        $condition .= "1=1";
+        }
+        $condition .= "1";
         
         return $query
                     ->where($condition)        

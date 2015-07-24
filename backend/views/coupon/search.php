@@ -1,4 +1,5 @@
 <?php
+use yii\helpers\Html;
 use yii\widgets\LinkPager;
 ?>
 
@@ -53,9 +54,15 @@ use yii\widgets\LinkPager;
                             <b> Added On : <?= $coupon->DateAdded ?></b>
                         </div>
                         <div class="col-md-3 col-md-offset-3" align="right" style="margin-bottom:10px">                           
-                            <button type="button" class="btn btn-block btn-primary" onClick="window.open('<?= $coupon->website->WebsiteURL?>')" formtarget="_blank">
-                                <?= (!$coupon->IsDeal)? empty($coupon->CouponCode)? "Empty" : $coupon->CouponCode : "GRAB DEAL"; ?>
-                            </button>
+                            <?= Html::button((!$coupon->IsDeal)? empty($coupon->CouponCode)? "Empty" : $coupon->CouponCode : "GRAB DEAL",
+                                        [
+                                            'class'=> 'btn btn-block btn-primary',
+                                            'id'=> 'openWindow',
+                                            'value'=>$coupon->website->WebsiteURL,
+                                            'formtarget' => '_blank',
+                                        ] 
+                                        );
+                            ?> 
 			</div>
                     </div>
 		</div>

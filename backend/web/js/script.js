@@ -8,3 +8,7 @@ $("#searchForm").on('change', function(){
        $("#change").html(data);
     });
 });
+
+$(document).on('click', '#openWindow', function(){
+   window.open($(this).val()); 
+});

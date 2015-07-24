@@ -31,24 +31,14 @@ AppAsset::register($this);
         <?php
             NavBar::begin([
                 'brandLabel' => 'Coupon Search',
-                'brandUrl' => Yii::$app->homeUrl,
+                'brandUrl' => Yii::$app->homeUrl."?r=coupon",
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',
                 ],
             ]);
             $menuItems = [
-                ['label' => 'Home', 'url' => ['/site/index']],
-            ];
-            if (Yii::$app->user->isGuest) {
-                $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-            } else {
-                $menuItems[] = [
-                    'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                    'url' => ['/site/logout'],
-                    'linkOptions' => ['data-method' => 'post']
-                ];
-            }
-            
+                ['label' => 'Home', 'url' => ['/coupon']],
+            ];            
             NavBar::end();
         ?>
 

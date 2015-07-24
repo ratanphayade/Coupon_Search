@@ -2,8 +2,6 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
-
-
 $this->title = "Coupon Search";
 ?>
 <style>
@@ -17,13 +15,12 @@ $this->title = "Coupon Search";
         -webkit-appearance: none;
     }
 </style>
-
 <div class="container-fluid" style="margin-top:-10px;">
     <div class="row">
         <div class="col-md-4" >
             <div class="panel-group" id="" style="position:fixed; width:300px">
                 <h1><?= "Coupon Search" ?></h1>
-                <form role="form" id="searchForm" >
+               <form role="form" id="searchForm" >
                 <div id="accordion" class="panel-group">
                     <div class="panel panel-default modal-content">
                         <div class="panel-heading">
@@ -83,7 +80,13 @@ $this->title = "Coupon Search";
                     </div>
                 </div>
                     <div class='panel-body col-md-offset-3'>
-                        <input type="button" class="btn btn-success" id="downloadExcel" value="Download Excel"/>
+                        <?= Html::Button("Download Excel",
+                                [
+                                    'class' => 'btn btn-success',
+                                    'id' => 'downloadExcel'
+                                ]
+                            );
+                        ?>
                     </div>                
             </form>
             </div>
@@ -130,9 +133,15 @@ $this->title = "Coupon Search";
                             <b> Added On : <?= $coupon->DateAdded ?></b>
                         </div>
                         <div class="col-md-3 col-md-offset-3" style="margin-bottom:10px">
-                            <button type="button" class="btn btn-block btn-primary" onClick="window.open('<?= $coupon->website->WebsiteURL?>')" formtarget="_blank">
-                                <?= (!$coupon->IsDeal)? empty($coupon->CouponCode)? "Empty" : $coupon->CouponCode : "GRAB DEAL"; ?>
-                            </button>
+                            <?= Html::button((!$coupon->IsDeal)? empty($coupon->CouponCode)? "Empty" : $coupon->CouponCode : "GRAB DEAL",
+                                        [
+                                            'class'=> 'btn btn-block btn-primary',
+                                            'id'=> 'openWindow',
+                                            'value'=>$coupon->website->WebsiteURL,
+                                            'formtarget' => '_blank',
+                                        ] 
+                                        );
+                            ?>                            
 			</div>
                     </div>
 		</div>

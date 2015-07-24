@@ -31,12 +31,12 @@ $this->title = "Coupon Search";
                         <div id="collapseOne" class="panel-collapse collapse">
                             <div class="panel-body modal-body">
                                 <label>
-                                        <select name='couponType' id='couponType' multiple size='3' class='selectpicker' style='width: 250px;'>
-                                            <option value='all' selected>Select All</option>
-                                            <option value='1'>Deal</option>
-                                            <option value='0'>Coupon</option>
-                                        </select>                                        
-                                    </label>
+                                    <select name='couponType' id='couponType' multiple size='3' class='selectpicker' style='width: 250px;'>
+                                        <option value='all' selected>Select All</option>
+                                        <option value='1'>Deal</option>
+                                        <option value='0'>Coupon</option>
+                                    </select>                                        
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -49,13 +49,13 @@ $this->title = "Coupon Search";
                         <div id="collapseTwo" class="panel-collapse collapse">
                             <div class="panel-body modal-body">
                                 <label>
-                                        <select name='Stores' id='Stores' multiple='multiple' size='15' class='selectpicker' style='width: 250px;'>
-                                            <option value='all' selected> Select All </option>                                                           
-                                            <?php foreach ($stores as $website) { ?>
-                                            <option value='<?= $website->WebsiteID ?>'><?= $website->WebsiteName ?></option>
-                                            <?php } ?> 
-                                        </select>  
-                                    </label>
+                                    <select name='Stores' id='Stores' multiple='multiple' size='15' class='selectpicker' style='width: 250px;'>
+                                        <option value='all' selected> Select All </option>                                                           
+                                        <?php foreach ($stores as $website) { ?>
+                                        <option value='<?= $website->WebsiteID ?>'><?= $website->WebsiteName ?></option>
+                                        <?php } ?> 
+                                    </select>  
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -67,14 +67,14 @@ $this->title = "Coupon Search";
                         </div>
                         <div id="collapseThree" class="panel-collapse collapse">
                             <div class="panel-body modal-body">
-                                    <label>
-                                        <select name='Category' id='Category' multiple='multiple' size='15' class='input-medium' style='width: 250px;'>
-                                            <option value='all' selected> Select All </option>                                                           
-                                            <?php foreach ($category as $cat) { ?>
-                                            <option value='<?= $cat->CategoryID ?>'><?= $cat->Name ?></option>
-                                            <?php } ?> 
-                                        </select> 
-                                    </label>
+                                <label>
+                                    <select name='Category' id='Category' multiple='multiple' size='15' class='input-medium' style='width: 250px;'>
+                                        <option value='all' selected> Select All </option>                                                           
+                                        <?php foreach ($category as $cat) { ?>
+                                        <option value='<?= $cat->CategoryID ?>'><?= $cat->Name ?></option>
+                                        <?php } ?> 
+                                    </select> 
+                                </label>
                             </div>
                         </div>
                     </div>
